@@ -23,7 +23,7 @@ def hello():
   import gunicorn
   if gunicorn.__version__ == '19.3.0':
     return 'PASS'
-  return 'FAIL: got version %s, expected version 19.3.0' % gunicorn.__version__
+  return f'FAIL: got version {gunicorn.__version__}, expected version 19.3.0'
 
 
 if __name__ == '__main__':

@@ -38,10 +38,8 @@ def version():
     return "FAIL: ?want must be set to a version"
 
   got = sys.version
-  if not got.startswith(want):
-    return 'FAIL: "{}" does not start with "{}"'.format(got, want)
-
-  return "PASS"
+  return ("PASS" if got.startswith(want) else
+          f'FAIL: "{got}" does not start with "{want}"')
 
 if __name__ == "__main__":
   app.run(port=os.environ["PORT"], debug=True)
