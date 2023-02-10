@@ -40,10 +40,8 @@ def version():
     return "FAIL: ?want must be set to a version"
 
   got = sys.version
-  if not got.startswith(want):
-    return 'FAIL: "{}" does not start with "{}"'.format(got, want)
-
-  return "PASS"
+  return ("PASS" if got.startswith(want) else
+          f'FAIL: "{got}" does not start with "{want}"')
 
 
 @app.route("/env")
@@ -58,10 +56,7 @@ def env():
     return "FAIL: ?want must not be empty"
 
   got = os.environ.get("FOO")
-  if not got.startswith(want):
-    return "FAIL: $FOO={}, want {}".format(got, want)
-
-  return "PASS"
+  return "PASS" if got.startswith(want) else f"FAIL: $FOO={got}, want {want}"
 
 
 if __name__ == "__main__":
